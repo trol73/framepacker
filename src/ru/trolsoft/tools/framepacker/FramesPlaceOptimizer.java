@@ -55,14 +55,24 @@ public class FramesPlaceOptimizer {
 		long t0 = System.currentTimeMillis();
 		int area;
 
+		int startWidth = 0;
+		int startHeight = 0;
+		for (ImageFrame f : src) {
+			if (f.width > startWidth) {
+				startWidth = f.width;
+			}
+			if (f.height > startHeight) {
+				startHeight = f.height;
+			}
+		}
 		final int maxSize = (srcImage.getWidth() + srcImage.getHeight())*10;
-		final int srcArea = srcImage.getWidth()*srcImage.getHeight();
+		final int srcArea = srcImage.getWidth() * srcImage.getHeight();
 		
 		SequenceGenerator sequenceGenerator = new SequenceGenerator(src);
 		for ( SequenceGenerator.SequenceType seqType : SequenceGenerator.SequenceType.values() ) {
 			int sequence[] = sequenceGenerator.createSequence(seqType);
-			for ( int ww = 0; ww < maxSize; ww += 1 ) {
-				for ( int hh = 0; hh < maxSize; hh += 1 ) {
+			for ( int ww = startWidth; ww < maxSize; ww += 1 ) {
+				for ( int hh = startHeight; hh < maxSize; hh += 1 ) {
 					int s = ww*hh;
 					if ( s >= srcArea || (s >= minArea && minArea > 0) ) {
 						continue;
@@ -89,11 +99,8 @@ System.out.println("------");
 		//System.out.println("Minimization time: " + (t01-t0)/1000.0 + " ms");
 		
 		
-		//final int dw = 10*srcImage.getWidth()/100;
-		//final int dh = 10*srcImage.getHeight()/100;
 		int loop1 = minSequence.length;
 		int loop2 = minSequence.length;
-		final int ds = 10;//w > dh ? dw : dh;			// TODO ???
 		for ( int rndIndex1 = 0 ; rndIndex1 < loop1; rndIndex1++ ) {
 			int sequence[] = new int[minSequence.length];
 			System.arraycopy(minSequence, 0, sequence, 0, minSequence.length);
@@ -106,7 +113,11 @@ System.out.println("------");
 				int t = sequence[i1];
 				sequence[i1] = sequence[i2];
 				sequence[i2] = t;
-				
+
+				final int dw = 10*minWidth0/100;
+				final int dh = 10*minHeight0/100;
+				final int ds = dw > dh ? dw : dh;
+
 				int fromW = minWidth0 - ds;
 				int fromH = minHeight0 - ds;
 				int toW = minWidth0 + ds;
