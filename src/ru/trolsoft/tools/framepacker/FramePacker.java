@@ -28,10 +28,10 @@ public class FramePacker {
 	static void usage() {
 		con.nl();
 		con.color(Color.White, true).out("FramePacker. ").reset().out("Version ").color(Color.Green, true).out(VERSION).reset().nl();
-		con.out("Copyright (c) Oleg Trifonov, 2012").nl();
-		con.color(Color.White, true).out("Usage: ").reset().out("framepacker: <source_image> <frame_width>x<frame_height> <output_image> [options]").nl();
+		con.out("Copyright (c) Oleg Trifonov, 2012-2013").nl();
+		con.color(Color.White, true).out("Usage:").nl().reset().out("\tframepacker: <source_image> <frame_width>x<frame_height> <output_image> [options]").nl();
 		con.color(Color.White, true).out("Options:").nl();
-		con.color(Color.Cyan, true).out("      -t=<transparency>    ").reset().out("set maximum aplha for transparent pixels").nl();
+		con.color(Color.Cyan, true).out("\t-t=<transparency>    ").reset().out("set maximum aplha for transparent pixels").nl();
 	}
 
 	

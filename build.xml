@@ -43,7 +43,7 @@
 				<include name="**/*" />
 			</fileset>
 			<manifest>
-				<attribute name="Main-Class" value="trolsoft.tools.framepacker.FramePacker" />
+				<attribute name="Main-Class" value="ru.trolsoft.tools.framepacker.FramePacker" />
 				<attribute name="Class-Path" value="." />
 				<attribute name="Implementation-Version" value="${version.num}.${build.number}" />
 				<attribute name="Built-Date" value="${TODAY}" />
